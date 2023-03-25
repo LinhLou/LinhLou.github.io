@@ -1,0 +1,46 @@
+// base box
+@mixin container-base($width:fit-content,$height:auto,$padding:0,$margin:0){
+  width: $width;
+  @if($height!=auto){
+    height: $height;
+  }
+  @if($padding!=0){
+    padding: $padding;
+  }
+  @if($margin!=0){
+    margin: $margin;
+  }
+}
+
+// box with shadow, radius border
+@mixin container-decoration($shadow,$radius,$background:white,$overflow:hidden){
+  @if($shadow!=0){
+    box-shadow: $shadow;
+  }
+  border-radius: $radius;
+  background: $background;
+  @if($overflow!=visible){
+    overflow: $overflow;
+  }
+}
+
+// element arrangement inside box
+@mixin row-display-elements($right:1,$left:0,$both:0,$center:0,$gap:0){
+  display:flex;
+  align-items: center;
+  
+  @if($right>0){
+    justify-content: end;
+  }@else if($left>0){
+    justify-content: start;
+  }@else if($both>0){
+    justify-content:space-between;
+  }@else if($center>0){
+    justify-content: center;
+  }
+
+  @if($gap>0){
+    gap:$gap;
+  }
+}
+

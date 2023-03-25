@@ -1,0 +1,158 @@
+
+// section location
+.city{
+  @include container-base(100%,auto,0,0);
+  background-color: $home-background_primary;
+  &_location{
+    @include container-base(100%,auto,15px,0);
+    @include row-display-elements(0,0,0,1,10px);
+    background-color: $home-background_secondary;
+  }
+  &_restaurants{
+    @include container-base(100%,auto,30px,0);
+    @include row-display-elements(0,0,0,1,0);
+    flex-direction: column;
+    text-align: center;
+    p{
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// section site operation 
+.operation{
+  @include container-base($home_operation-width,$home_operation-height,$home_operation-padding,$home_operation-margin);
+  &>*:not(:first-child){
+    margin-top:$home_operation-space-between-step;
+  }
+
+  &_step{
+    @include container-base($home_operation-step-width,$home_operation-step-height,$home_operation-step-padding,$home_operation-step-margin);
+    margin-left:8px; // alignement with title Fonctionnement
+    @include container-decoration($box-shadow,$box-border-radius,$home-background_primary,visible);
+    @include row-display-elements(0,1,0,0,20px);
+    z-index: 1;
+    position: relative;
+    .fa-solid{
+      @include container-base(1.2rem,1.2rem,0,0);
+      @include row-display-elements(0,0,0,1,0);
+      color: $color-primary;
+    }
+    span{
+      @include row-display-elements(0,0,0,1,0);
+      @include container-base(16px,16px,0,0);
+      @include container-decoration(0,8px,$color-primary);
+      font-size: 0.6rem;
+      color: white;
+      position: absolute;
+      left:-8px; //half of span width
+      top:50%;
+      transform:translateY(-50%);
+    }
+    &::after{
+      content:"";
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      position: absolute;
+      top:0;
+      left:0;
+      right: 0;
+      bottom: 0;
+      background-color: $home-background_tertiary;
+      border-radius: $box-border-radius;
+      opacity: 0;
+      transition: opacity 250ms;
+    }
+    &:hover{
+      cursor: url('../../assets/hand_cursor.png'), auto;
+      &::after{
+        opacity: 1;
+      }
+    }
+
+  }
+
+}
+
+// section restaurants
+.restaurants{
+  @include container-base($home_restaurants-width,$home_restaurants-height,$home_restaurants-padding,$home_restaurants-margin);
+  background-color: $home-background_primary;
+  &_container >*{
+    margin-top:$home-space-betwen-restaurant;
+  }
+}
+
+.restaurant-preview{
+  a{
+    cursor:url('../../assets/hand_cursor.png'), auto;
+  }
+  display: block;
+  @include container-base($home_restaurant-preview-width,$home_restaurant-preview-height,0,0);
+  @include container-decoration($box-shadow,$box-border-radius,white,hidden);
+  position: relative;
+  &_state{
+    position: absolute;
+    top:15px;
+    right:10px;
+    padding:5px 10px;
+    background-color: $color-tertiary;
+    color: darken($color-tertiary,40%);
+    font-weight: 700;
+  }
+  &_photo{
+    display: block;
+    @include container-base(100%,80%,0,0);
+    object-fit: cover;
+  }
+  &_infos{
+    @include container-base(100%,20%,0 1rem,0);
+    @include row-display-elements(0,0,1,0,0);
+    h2{
+      margin-bottom: 0.2rem;
+    }
+  }
+}
+
+// tablette and desktop
+@media  screen and (min-width:768px) {
+  .main{
+    background-color: $home-background_primary;
+  }
+  .desktop{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 30px;
+    padding: 30px;
+    section{
+      background-color: white;
+    }
+  }
+  .restaurants_container{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 30px;
+    padding-bottom: 20px;
+    min-height: 300px;
+  }
+  .restaurant-preview{
+    height: 100%;
+    &_photo{
+      height: 250px;
+    }
+    &_infos{
+      padding-top:1rem;
+    }
+
+  }
+  .footer{
+    &_container-lien{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      column-gap: 10px;
+    }
+  }
+
+}

@@ -1,0 +1,176 @@
+// all container
+._container{
+  &_main{
+    position: relative;
+    z-index: 1;
+  }
+  &_restaurant{
+    @include container-base(100%,auto,0,-30px 0 0 0);
+    @include container-decoration(0,30px 30px 0 0,$menu-background,hidden);
+    position: relative;
+    z-index: 2;
+  }
+  &_meal{
+    @include container-base(100%,auto,0 20px,0);
+  }
+  &_meal-part{
+    margin-top:30px;
+  }
+  &_plat{
+    @include container-base(100%,auto,0,10px 0 0);
+    @include container-decoration($box-shadow,$box-border-radius,white,hidden);
+    display: flex;
+    // animation lauch
+    &:hover{
+      cursor:url('../../assets/hand_cursor.png'), pointer;
+      ._plat {
+        &_price{
+          transform: translateX(-3.5rem);
+        }
+        &_btn{
+          transform: translateX(-3.5rem);
+          .fa-circle-check{
+            transform: rotate(1turn);
+          }
+        }
+        &_name {
+            width: 60%;
+        }
+      }
+    }
+  }
+}
+
+._main{
+  &_photo{
+   display: block;
+   @include container-base($menu_photo-width,$menu_photo-height,0,0);
+   object-fit: cover;
+   object-position: center;
+  }
+  &_btn{
+    @include row-display-elements(0,0,0,1,0);
+    padding:30px;
+  }
+}
+// restaunrant name
+._restaurant_titre{
+  @include row-display-elements(0,0,1,0,0);
+  padding:30px 40px 0 20px;
+  h1{
+    font-family: $font-family;
+  }
+}
+// meal part name
+._meal-part_titre{
+  position: relative;
+  padding-bottom: 5px;
+  &::after{
+    content: "";
+    position: absolute;
+    bottom:0;
+    left:0;
+    width: 40px;
+    border-bottom: 2px solid $color-tertiary;
+  }
+}
+// plat
+._plat{
+  &_infos{
+    width: 100%;
+    padding:0.5rem 1rem 0.5rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+  &_name{
+    transition: width 300ms;
+    width: 90%;
+  }
+  &_name h2, &_name p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  &_name h2{
+    padding-bottom: 0.3rem;
+  }
+  &_price{
+    font-weight: bold;
+    transition: transform 400ms;
+  }
+  &_btn{
+    background-color: $color-tertiary;
+    border:none;
+    width: 3.5rem;
+    margin-right: -3.5rem;
+    border-top-right-radius: $box-border-radius;
+    border-bottom-right-radius: $box-border-radius;
+    transition: transform 400ms;
+    .fa-circle-check{
+      color:white;
+      font-size: 1.5rem;
+      transition: transform 600ms 200ms;
+    }
+  }
+  // appearance of each dish
+  @for $i from 1 through 10 {
+    &_#{$i}{
+      animation: apparition-opac $menu-duration_plat $menu-delay_base*$i ease-out backwards, apparition-transl $menu-duration_plat $menu-delay_base*$i+150ms ease-out backwards;
+    }
+  }
+
+}
+
+// appearance of part meal 
+._entree{
+  animation: apparition-opac $menu-duration_plat $menu-delay_init ease-in-out backwards;
+}
+._principale{
+  animation: apparition-opac $menu-duration_plat $menu-delay_init+$menu-delay_base*3 ease-in-out backwards;
+}
+._dessert{
+  animation: apparition-opac $menu-duration_plat $menu-delay_init+$menu-delay_base*6 ease-in-out backwards;
+}
+
+// appearance  
+@keyframes apparition-opac{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+// appearance with deplacement
+@keyframes apparition-transl{
+  0% {
+    transform:translateY(10px);
+  }
+  100% {
+    transform:translateY(0);
+  }
+}
+
+// tablette and desktop
+@media  screen and (min-width:768px) {
+  ._main_photo{
+    height: $menu_photo-height*2;
+  }
+  ._container{
+    &_meal{
+      padding:0 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr);
+      column-gap: 30px;
+    }
+    &_plats{
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+  }
+  
+}

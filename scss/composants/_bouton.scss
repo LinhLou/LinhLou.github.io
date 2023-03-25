@@ -1,0 +1,66 @@
+// button principale
+.btn{
+  @include container-base(map-get($button-principal,width),map-get($button-principal,height),0,0);
+  @include container-decoration(map-get($button-principal,shadow),map-get($button-principal,border-radius),map-get($button-principal,back-ground),visible);
+  border:none;
+  color: map-get($button-principal,color);
+  position: relative;
+  z-index: 1;
+  &::after{
+    content:"";
+    @include container-decoration(map-get($button-principal,shadow-hover),inherit,map-get($button-principal,background-hover),visible);
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 250ms;
+  }
+  &:hover{
+    cursor: url('../../assets/hand_cursor.png'), auto;
+    &::after{
+      opacity: 1;
+    }
+  }
+  &--width{
+    width: map-get($button-principal,width_home);
+  }
+}
+
+// button heart
+.btn_heart{
+  @include container-base(40px,40px,0,0);
+  @include row-display-elements(0,0,0,1,0);
+  border:none;
+  background: transparent;
+  position: relative;
+  & .fa-regular, .fa-solid{
+    position: absolute;
+    font-size: 1rem;
+    transition: opacity 250ms;
+    color:rgb(159, 157, 157);
+  }
+  .fa-regular{
+    z-index: 1;
+    &:hover {
+      cursor:url('../../assets/hand_cursor.png'), auto;
+      opacity: 0;
+      &+ .fa-solid{
+        background:linear-gradient(to bottom,$color-primary,$color-secondary);
+        -webkit-background-clip: text;
+        color:transparent;
+        opacity: 1;
+      }
+    }
+  }
+  .fa-solid{
+    opacity:0;
+  }
+  &--big{
+    transform: scale(1.3);
+  }
+}
+
+// button 

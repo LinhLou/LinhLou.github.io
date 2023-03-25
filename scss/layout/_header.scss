@@ -1,0 +1,20 @@
+.header{
+  @include container-base($header-width,$header-height,0,0);
+  @include row-display-elements(0,0,0,1,0);
+  position: relative;
+  &_logo{
+    width: $header_logo-width;
+    height: $header_logo-height;
+    object-fit: contain;
+  }
+  &_arrow{
+    position: absolute;
+    left:20px;
+    .fa-arrow-left{
+      font-size: 20px;
+    }
+  }
+  &_arrow-hidden{
+    display: none;
+  }
+}
